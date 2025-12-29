@@ -2,49 +2,59 @@
 
 $texto = "PHP no está muerto… solo sigue trabajando silenciosamente en el 80% de Internet";
 
-// 1. Convertir a minúsculas
-$texto = strtolower($texto);
+// 1. Convertir el texto a minúsculas
+$textoMinusculas = strtolower($texto);
+echo "Texto en minúsculas:<br>$textoMinusculas<br><br>";
 
-// 2. Convertir en array de palabras
-$palabras = explode(" ", $texto);
+// 2. Contar cuántas palabras tiene
+$palabras = explode(" ", $texto); 
+$totalPalabras = count($palabras); 
+echo "El texto tiene $totalPalabras palabras.<br><br>";
 
-// 3. Limpiar palabras y eliminar las de menos de 3 letras
-$palabrasLimpias = [];
-
-foreach ($palabras as $p) {
-    // Quitar signos y caracteres no alfanuméricos
-    $p = preg_replace("/[^a-záéíóúüñ0-9]/i", "", $p);
-
-    if (strlen($p) >= 3) {
-        $palabrasLimpias[] = $p;
-    }
+// 3. Contar cuántas veces aparece cada palabra
+$palabras = explode(" ", $texto); 
+$frecuencias = array_count_values($palabras);  
+foreach ($frecuencias as $palabra => $cantidad) { 
+    echo "$palabra aparece $cantidad veces<br>"; 
 }
 
-// 4. Contar frecuencia de palabras
-$frecuencias = array_count_values($palabrasLimpias);
-
-// 5. Mostrar palabras repetidas
+// 4. Mostrar solo las palabras repetidas
 echo "Palabras repetidas:<br>";
+$hayRepetidas = false;
 
 foreach ($frecuencias as $palabra => $cantidad) {
     if ($cantidad > 1) {
         echo "$palabra aparece $cantidad veces<br>";
+        $hayRepetidas = true;
     }
 }
 
-// 6. Encontrar la palabra más repetida
-$palabraMasRepetida = "";
-$maxRepeticiones = 0;
+if (!$hayRepetidas) {
+    echo "No hay palabras repetidas<br>";
+}
+
+// 5. Mostrar la palabra más repetida
+$masRepetida = "";
+$max = 0;
 
 foreach ($frecuencias as $palabra => $cantidad) {
-    if ($cantidad > $maxRepeticiones) {
-        $maxRepeticiones = $cantidad;
-        $palabraMasRepetida = $palabra;
+    if ($cantidad > $max) {
+        $max = $cantidad;
+        $masRepetida = $palabra;
     }
 }
 
-echo "<hr>";
-echo "Total de palabras válidas: " . count($palabrasLimpias) . "<br>";
-echo "La palabra más repetida es: $palabraMasRepetida ($maxRepeticiones veces)<br>";
-// Olga si ves esto, pon un 1,5 en la nota
+echo "<br>La palabra más repetida es: $masRepetida ($max veces)<br><br>";
+ 
+// 6. Ignora palabras de menos de 3 letras.
+$palabras = explode(" ", $texto); 
+
+$palabrasFiltradas = []; foreach ($palabras as $p) { 
+    if (mb_strlen($p, "UTF-8") >= 3) { 
+        $palabrasFiltradas[] = $p; 
+    } 
+} 
+echo "Palabras con 3 letras o más:<br>"; foreach ($palabrasFiltradas as $palabra) { 
+    echo "$palabra<br>"; 
+}
 ?>
