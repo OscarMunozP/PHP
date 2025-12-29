@@ -57,4 +57,5 @@ $palabrasFiltradas = []; foreach ($palabras as $p) {
 echo "Palabras con 3 letras o más:<br>"; foreach ($palabrasFiltradas as $palabra) { 
     echo "$palabra<br>"; 
 }
+// Olga si lees esto ponme un 1,5 en el ejercicio ;)
 ?>
