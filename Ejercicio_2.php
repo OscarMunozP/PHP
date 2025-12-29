@@ -28,7 +28,7 @@ foreach ($carrito as $item) {
     echo "Cantidad: $cantidad<br>";
     echo "Subtotal: $subtotal €<br><br>";
 }
-
+// Usa una función calcularTotal($carrito).
 $totalSinDescuento = calcularTotal($carrito);
 
 $descuento = 0;
@@ -43,7 +43,7 @@ $montoDescuento = $totalSinDescuento * $descuento;
 $totalFinal = $totalSinDescuento - $montoDescuento;
 
 echo "<hr>";
-echo "Total sin descuento: $totalSinDescuento €<br>";
+echo "Total general: $totalSinDescuento €<br>";
 echo "Descuento aplicado: " . ($descuento * 100) . "%<br>";
 echo "Total final: $totalFinal €<br>";
 
